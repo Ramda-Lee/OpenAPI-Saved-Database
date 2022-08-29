@@ -1,17 +1,15 @@
 package com.fpr.service;
 
-import com.fpr.domain.Product;
-import com.fpr.dto.ProductRequestDto;
-import com.fpr.dto.property.BaseList;
-import com.fpr.dto.property.OptionList;
+import com.fpr.domain.Member;
+import com.fpr.domain.SavingsProduct;
+import com.fpr.dto.property.SavingsBaseList;
+import com.fpr.dto.property.SavingsOptionList;
 import com.fpr.persistence.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,46 +18,55 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<Product> findProduct(){
+    public List<SavingsProduct> list(){
         return productRepository.findAll();
     }
 
-    public void apiSave( BaseList baseList, OptionList optionList) {
+    public void apiSave(SavingsBaseList savingsBaseList, SavingsOptionList savingsOptionList) {
 
-        Product product = new Product();
+        SavingsProduct savingsProduct = new SavingsProduct();
 
-        product.setDcls_month(baseList.getDcls_month());
-        product.setFin_co_no(baseList.getFin_co_no());
-        product.setFin_prdt_cd(baseList.getFin_prdt_cd());
-        product.setKor_co_nm(baseList.getKor_co_nm());
-        product.setFin_prdt_nm(baseList.getFin_prdt_nm());
-        product.setJoin_way(baseList.getJoin_way());
-        product.setMtrt_int(baseList.getMtrt_int());
-        product.setSpcl_cnd(baseList.getSpcl_cnd());
-        product.setJoin_deny(baseList.getJoin_deny());
-        product.setJoin_member(baseList.getJoin_member());
-        product.setEtc_note(baseList.getEtc_note());
-        product.setMax_limit(baseList.getMax_limit());
-        product.setDcls_strt_day(baseList.getDcls_strt_day());
-        product.setDcls_end_day(baseList.getDcls_end_day());
-        product.setFin_co_subm_day(baseList.getFin_co_subm_day());
+        savingsProduct.setDcls_month(savingsBaseList.getDcls_month());
+        savingsProduct.setFin_co_no(savingsBaseList.getFin_co_no());
+        savingsProduct.setFin_prdt_cd(savingsBaseList.getFin_prdt_cd());
+        savingsProduct.setKor_co_nm(savingsBaseList.getKor_co_nm());
+        savingsProduct.setFin_prdt_nm(savingsBaseList.getFin_prdt_nm());
+        savingsProduct.setJoin_way(savingsBaseList.getJoin_way());
+        savingsProduct.setMtrt_int(savingsBaseList.getMtrt_int());
+        savingsProduct.setSpcl_cnd(savingsBaseList.getSpcl_cnd());
+        savingsProduct.setJoin_deny(savingsBaseList.getJoin_deny());
+        savingsProduct.setJoin_member(savingsBaseList.getJoin_member());
+        savingsProduct.setEtc_note(savingsBaseList.getEtc_note());
+        savingsProduct.setMax_limit(savingsBaseList.getMax_limit());
+        savingsProduct.setDcls_strt_day(savingsBaseList.getDcls_strt_day());
+        savingsProduct.setDcls_end_day(savingsBaseList.getDcls_end_day());
+        savingsProduct.setFin_co_subm_day(savingsBaseList.getFin_co_subm_day());
 
-        product.setIntr_rate_type(optionList.getIntr_rate_type());
-        product.setIntr_rate_type_nm(optionList.getIntr_rate_type_nm());
-        product.setSave_trm(optionList.getSave_trm());
-        product.setIntr_rate(optionList.getIntr_rate());
-        product.setIntr_rate2(optionList.getIntr_rate2());
+        savingsProduct.setIntr_rate_type(savingsOptionList.getIntr_rate_type());
+        savingsProduct.setIntr_rate_type_nm(savingsOptionList.getIntr_rate_type_nm());
+        savingsProduct.setSave_trm(savingsOptionList.getSave_trm());
+        savingsProduct.setIntr_rate(savingsOptionList.getIntr_rate());
+        savingsProduct.setIntr_rate2(savingsOptionList.getIntr_rate2());
 
-        productRepository.save(product);
+        productRepository.save(savingsProduct);
 
     }
 
-    public Optional findOne(Long productId) {
-        return productRepository.findById(productId);
+    @Transactional(readOnly = true)
+    public SavingsProduct findOne(Long sproductId) {
+        SavingsProduct savingsProduct = productRepository.findById(sproductId).orElseThrow(() -> {
+            return new IllegalArgumentException("상세조회 실패 : 상품 정보를 찾을 수 없습니다");
+        });
+        return savingsProduct;
     }
 
-    public void recommendProduct() {
+    public void recommendProduct(Member member) {
+        productRepository.recommend(member.getAge(), member.getJob());
+    }
 
+    public SavingsProduct searchProduct(SavingsProduct savingsProduct) {
+        SavingsProduct search = productRepository.search(savingsProduct.getKor_co_nm());
+        return search;
     }
 
 }
