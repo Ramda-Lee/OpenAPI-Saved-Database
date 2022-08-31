@@ -1,11 +1,10 @@
 package com.fpr.domain;
 
 
-import com.fpr.dto.property.IntrRateType;
-import com.fpr.dto.property.IntrRateTypeNm;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -17,30 +16,50 @@ public class SavingsProduct {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sproductId")
-    private Long id;
+    @NotNull
+    private Long sProductId;
 
-    private String dcls_month;
-    private String fin_co_no;
-    private String fin_prdt_cd;
-    private String kor_co_nm;
-    private String fin_prdt_nm;
-    private String join_way;
-    private String mtrt_int;
-    private String spcl_cnd;
-    private String join_deny;
-    private String join_member;
-    private String etc_note;
-    private Long max_limit;
-    private String dcls_strt_day;
-    private String dcls_end_day;
-    private String fin_co_subm_day;
+    @Column(name = "dcls_month")
+    private String dclsMonth;
+    @Column(name = "fin_co_no")
+    private String finCoNo;
+    @Column(name = "fin_prdt_cd")
+    private String finPrdtCd;
+    @Column(name = "kor_co_nm")
+    private String korCoNm;
+    @Column(name = "fin_prdt_nm")
+    private String finPrdtNm;
+    @Column(name = "join_way")
+    private String joinWay;
+    @Column(name = "mtrt_int")
+    private String mtrtInt;
+    @Column(name = "spcl_cnd")
+    private String spclCnd;
+    @Column(name = "join_deny")
+    private String joinDeny;
+    @Column(name = "join_member")
+    private String joinMember;
+    @Column(name = "etc_note")
+    private String etcNote;
+    @Column(name = "max_limi")
+    private Long maxLimit;
+    @Column(name = "dcls_strt_day")
+    private String dclsStrtDay;
+    @Column(name = "dcls_end_day")
+    private String dclsEndDay;
+    @Column(name = "fin_co_subm_day")
+    private String finCoSubmDay;
 
-    private IntrRateType intr_rate_type;
-    private IntrRateTypeNm intr_rate_type_nm;
-    private String save_trm;
-    private double intr_rate;
-    private double intr_rate2;
+    @Column(name = "intr_rate_type")
+    private String intrRateType;
+    @Column(name = "intr_rate_type_nm")
+    private String intrRateTypeNm;
+    @Column(name = "save_trm")
+    private String saveTrm;
+    @Column(name = "intr_rate")
+    private double intrRate;
+    @Column(name = "intr_rate2")
+    private double intrRate2;
 
 
 }

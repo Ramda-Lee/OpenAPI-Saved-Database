@@ -20,10 +20,20 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
       use-new-id-generator-mappings: false
-    show-sql: true
     properties:
-      hibernate.format_sql: true
+      hibernate:
+      format_sql: true
+      highlight_sql: true
+
+  logging:
+    level:
+      org.hibernate.SQL: off
+      org.hibernate.type: off
+
+  jwt:
+    secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
