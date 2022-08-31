@@ -4,6 +4,7 @@ package com.fpr.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -11,12 +12,11 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstallmentSavingsProduct {
+public class InstallmentSavingsProduct extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "isproductId")
-    private Long id;
+    private Long isproductId;
 
     @Column(name = "dcls_month")
     private String dclsMonth;

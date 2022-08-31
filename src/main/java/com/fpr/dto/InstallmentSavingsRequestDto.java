@@ -23,7 +23,7 @@ public class InstallmentSavingsRequestDto {
     }
 
     @Getter @Setter
-    public class BaseList {
+    public static class BaseList {
         private String dcls_month;
         private String fin_co_no;
         private String fin_prdt_cd;
@@ -42,7 +42,7 @@ public class InstallmentSavingsRequestDto {
     }
 
     @Getter @Setter
-    public class OptionList {
+    public static class OptionList {
 
         private String intr_rate_type;
         private String intr_rate_type_nm;

@@ -27,8 +27,8 @@ public class SavingsApiController {
     }
 
     @GetMapping("/savingsapi")
-    public SavingsResponseDto callAPI(SavingsProduct savingsProduct) throws JsonProcessingException {
-        savingsService.apiSave(savingsProduct);
+    public SavingsResponseDto callAPI() throws JsonProcessingException {
+        savingsService.apiSave();
         return new SavingsResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 

@@ -43,10 +43,11 @@ public class InstallmentSavingsService {
 
             UriComponents uri = UriComponentsBuilder.fromHttpUrl(url + "?" + "auth=41a94be07dfa9f03716566379d2d2371" + "&" + "topFinGrpNo=020000&pageNo=1").build();
 
-            ResponseEntity<InstallmentSavingsResponseDto> responseEntity = rt.exchange(uri.toString(), HttpMethod.GET, entity, InstallmentSavingsResponseDto.class);
+            ResponseEntity<InstallmentSavingsProduct> responseEntity = rt.exchange(uri.toString(), HttpMethod.GET, entity, InstallmentSavingsProduct.class);
             HttpStatus statusCode = HttpStatus.valueOf(responseEntity.getStatusCodeValue());
             HttpHeaders header = responseEntity.getHeaders();
-            InstallmentSavingsResponseDto body = responseEntity.getBody();
+            InstallmentSavingsProduct body = responseEntity.getBody();
+
 
         } catch (HttpClientErrorException | HttpServerErrorException e) {
             result.put("statusCode", e.getRawStatusCode());
