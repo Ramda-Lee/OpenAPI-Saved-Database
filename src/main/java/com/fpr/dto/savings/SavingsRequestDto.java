@@ -1,21 +1,18 @@
-package com.fpr.dto;
+package com.fpr.dto.savings;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fpr.domain.SavingsProduct;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import java.util.List;
 
 @Getter @Setter
-@NoArgsConstructor
-public class SavingsResponseDto<T> {
+public class SavingsRequestDto {
 
     private Result result;
-    int status;
-    T data;
-
-    public SavingsResponseDto(T value, T i) {
-    }
 
     @Getter @Setter
     public class Result {
@@ -36,6 +33,7 @@ public class SavingsResponseDto<T> {
     }
 
     @Getter @Setter
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     public static class BaseList {
         @Column(name = "dcls_month")
         private String dclsMonth;
@@ -68,12 +66,31 @@ public class SavingsResponseDto<T> {
         @Column(name = "fin_co_subm_day")
         private String finCoSubmDay;
 
+        public SavingsProduct toEntity(){
+            return SavingsProduct.builder()
+                    .dclsMonth(dclsMonth)
+                    .finCoNo(finCoNo)
+                    .finPrdtCd(finPrdtCd)
+                    .korCoNm(korCoNm)
+                    .finPrdtNm(finPrdtNm)
+                    .joinWay(joinWay)
+                    .mtrtInt(mtrtInt)
+                    .spclCnd(spclCnd)
+                    .joinDeny(joinDeny)
+                    .joinMember(joinMember)
+                    .etcNote(etcNote)
+                    .maxLimit(maxLimit)
+                    .dclsStrtDay(dclsStrtDay)
+                    .dclsEndDay(dclsEndDay)
+                    .finCoSubmDay(finCoSubmDay)
+                    .build();
+        }
+
     }
 
     @Getter @Setter
+    @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
     public static class OptionList {
-
-
 
         @Column(name = "intr_rate_type")
         private String intrRateType;
@@ -87,6 +104,5 @@ public class SavingsResponseDto<T> {
         private double intrRate2;
 
     }
-    
 
 }

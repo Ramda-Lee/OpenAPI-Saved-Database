@@ -1,5 +1,8 @@
-package com.fpr.dto;
+package com.fpr.dto.installment;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fpr.dto.savings.SavingsRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,8 +35,8 @@ public class InstallmentSavingsResponseDto<T> {
         private String errCd;
         @Column(name = "err_msg")
         private String errMsg;
-        private List<SavingsRequestDto.BaseList> baseList;
-        private List<SavingsRequestDto.OptionList> optionList;
+        private List<InstallmentSavingsRequestDto.BaseList> baseList;
+        private List<InstallmentSavingsRequestDto.OptionList> optionList;
     }
 
     @Getter @Setter
@@ -70,21 +73,6 @@ public class InstallmentSavingsResponseDto<T> {
         @Column(name = "fin_co_subm_day")
         private String finCoSubmDay;
 
-//        private String dcls_month;
-//        private String fin_co_no;
-//        private String fin_prdt_cd;
-//        private String kor_co_nm;
-//        private String fin_prdt_nm;
-//        private String join_way;
-//        private String mtrt_int;
-//        private String spcl_cnd;
-//        private String join_deny;
-//        private String join_member;
-//        private String etc_note;
-//        private Long max_limit;
-//        private String dcls_strt_day;
-//        private String dcls_end_day;
-//        private String fin_co_subm_day;
     }
 
     @Getter @Setter
@@ -105,13 +93,5 @@ public class InstallmentSavingsResponseDto<T> {
         @Column(name = "intr_rate2")
         private double intrRate2;
 
-
-//        private String intr_rate_type;
-//        private String intr_rate_type_nm;
-//        private String rsrv_type;
-//        private String rsrv_type_nm;
-//        private String save_trm;
-//        private double intr_rate;
-//        private double intr_rate2;
     }
 }
